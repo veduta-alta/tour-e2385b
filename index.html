@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Виртуальный тур</title>
+<meta name="description" content="Интерактивный тур по территории: 46 панорамных точек, переходы по дорожкам и план с навигацией.">
+<meta name="theme-color" content="#0d0f12">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- превью ссылки в мессенджерах и соцсетях -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Виртуальный тур">
+<meta property="og:description" content="46 панорамных точек, переходы по дорожкам и интерактивный план территории.">
+<meta property="og:image" content="img/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="pano"></div>
+
+<div id="loader"><div class="ring"></div><span>Загрузка панорамы…</span></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <span class="brand-text">Виртуальный тур<em id="sceneName">—</em></span>
+  </div>
+  <div class="tools">
+    <button id="btnPrev"  class="tool" title="Предыдущая точка">‹</button>
+    <button id="btnNext"  class="tool" title="Следующая точка">›</button>
+    <button id="btnAuto"  class="tool" title="Автовращение">◎</button>
+    <button id="btnFs"    class="tool" title="Полный экран">⛶</button>
+  </div>
+</header>
+
+<div class="compass" id="compass" title="Направление взгляда">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" class="c-bg"/>
+    <g id="compassRose">
+      <path d="M50 8 L57 46 L50 41 L43 46 Z" class="c-n"/>
+      <path d="M50 92 L43 54 L50 59 L57 54 Z" class="c-s"/>
+    </g>
+    <circle cx="50" cy="50" r="4" class="c-dot"/>
+  </svg>
+</div>
+
+<aside class="minimap" id="minimap">
+  <div class="mm-head">
+    <span class="mm-title">План территории</span>
+    <div class="mm-btns">
+      <button id="mmSize"   class="mm-btn" title="Увеличить карту">⤢</button>
+      <button id="mmToggle" class="mm-btn" title="Свернуть">–</button>
+    </div>
+  </div>
+  <div class="mm-body">
+    <div class="mm-stage" id="mmStage">
+      <img id="mmImg" src="img/map.jpg" alt="План территории">
+      <svg class="mm-links" id="mmLinks" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      <div id="mmDots"></div>
+    </div>
+  </div>
+</aside>
+
+<button class="mm-restore" id="mmRestore" title="Показать карту">
+  <svg viewBox="0 0 24 24"><path d="M9 3 3 5.5v15L9 18l6 3 6-2.5v-15L15 6 9 3Zm0 2.2 6 3v10.6l-6-3V5.2Z"/></svg>
+</button>
+
+<div class="hint" id="hint">Тяните мышью, чтобы осмотреться · стрелки ведут к следующей точке</div>
+
+<!-- панель калибровки хотспотов -->
+<div class="calib" id="calib">
+  <div class="calib-head">Калибровка хотспотов <button id="calibClose">×</button></div>
+  <div class="calib-body">
+    <p>Кликните по панораме там, где должна стоять стрелка, затем выберите, к какой точке она ведёт.</p>
+    <div class="calib-row"><span>yaw</span><b id="cYaw">–</b><span>pitch</span><b id="cPitch">–</b></div>
+    <div class="calib-row" id="calibTargets"></div>
+    <button id="calibExport" class="calib-exp">Экспорт правок (JSON)</button>
+    <small>Клавиша <kbd>E</kbd> — включить/выключить режим</small>
+  </div>
+</div>
+
+<script src="vendor/marzipano.js"></script>
+<script src="js/data.js"></script>
+<script src="js/tour.js"></script>
+</body>
+</html>
